@@ -1,6 +1,1 @@
-
-
-
-const teste = 22
-
-
+const teste = 22;
