@@ -92,20 +92,76 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente local
 
 ## ↔️ Endpoints da API
 
-Atualmente, os seguintes endpoints estão implementados:
+A API oferece um CRUD completo para gerenciar **Usuários** e, futuramente, **Alunos**.
 
-### Usuários (`/users`)
+### Estrutura dos Endpoints
 
-#### `POST /users`
--   **Descrição:** Cria um novo usuário no sistema.
--   **Corpo da Requisição (JSON):**
-    ```json
-    {
-      "nome": "John Doe",
-      "email": "john.doe@example.com",
-      "password": "password123"
-    }
-    ```
+A seguir, uma visão geral dos endpoints disponíveis.
+
+#### **Recurso: Usuários (`/users`)**
+
+| Método | Rota          | Descrição                        | Autenticação |
+| :----- | :------------ | :--------------------------------- | :----------- |
+| `POST` | `/users`      | Cria um novo usuário.              | Não          |
+| `GET`  | `/users`      | Lista todos os usuários.           | Não          |
+| `GET`  | `/users/:id`  | Busca um usuário pelo ID.          | Não          |
+| `PUT`  | `/users/:id`  | Atualiza um usuário existente.     | **Sim** (JWT)  |
+| `DELETE`| `/users/:id`  | Remove um usuário.                 | **Sim** (JWT)  |
+
+---
+
+### Exemplos de Uso (cURL)
+
+Use os comandos abaixo para interagir com a API. Substitua `:3001` pela porta correta, se necessário.
+
+#### **1. Criar um Novo Usuário**
+
+```bash
+curl -X POST http://localhost:3001/users \
+-H "Content-Type: application/json" \
+-d '{
+  "nome": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "securepassword123"
+}'
+```
+
+#### **2. Listar Todos os Usuários**
+
+```bash
+curl -X GET http://localhost:3001/users
+```
+
+#### **3. Buscar um Usuário por ID**
+
+*Substitua `1` pelo ID do usuário desejado.*
+
+```bash
+curl -X GET http://localhost:3001/users/1
+```
+
+#### **4. Atualizar um Usuário**
+
+*Este endpoint exigirá um token JWT no futuro. Substitua `1` pelo ID do usuário e `SEU_TOKEN_JWT` pelo token de autenticação.*
+
+```bash
+curl -X PUT http://localhost:3001/users/1 \
+-H "Content-Type: application/json" \
+-H "Authorization: " \
+-d '{
+  "nome": "John Doe Updated",
+  "email": "john.doe.updated@example.com"
+}'
+```
+
+#### **5. Deletar um Usuário**
+
+*Este endpoint exigirá um token JWT no futuro. Substitua `1` pelo ID do usuário e `SEU_TOKEN_JWT` pelo token de autenticação.*
+
+```bash
+curl -X DELETE http://localhost:3001/users/1 \
+-H "Authorization: "
+```
 
 ---
 
@@ -126,7 +182,7 @@ Atualmente, os seguintes endpoints estão implementados:
 A API ainda está em fase inicial. Os próximos recursos a serem implementados incluem:
 
 -   [ ] Implementar o CRUD completo para **Alunos** (Create, Read, Update, Delete).
--   [ ] Implementar as rotas restantes para **Usuários** (Read, Update, Delete).
+-   [x] Implementar o CRUD completo para **Usuários** (Create, Read, Update, Delete).
 -   [ ] Adicionar sistema de autenticação e autorização com **JSON Web Tokens (JWT)**.
 -   [ ] Criar rotas protegidas que exijam um token de autenticação.
 -   [ ] Implementar funcionalidade de upload de fotos para os alunos.
