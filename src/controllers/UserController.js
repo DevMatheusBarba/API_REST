@@ -1,14 +1,14 @@
-import Users from '../models/user';
+import User from '../models/user';
 
-class HomeController {
-  async index(req, res) {
-    const newUsers = await Users.create({
-      nome: 'Matheus',
-      email: 'matheus.silva@gmail.com',
-      password: '123456',
-    });
-    res.json(newUsers);
+class UserController {
+  async create(req, res) {
+    try {
+      const newUser = await User.create(req.body);
+      res.json(newUser);
+    } catch (error) {
+      res.status(400).json({ errors: error.errors.map((e) => e.message) });
+    }
   }
 }
 
-export default new HomeController();
+export default new UserController();
