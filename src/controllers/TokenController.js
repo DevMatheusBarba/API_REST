@@ -1,8 +1,8 @@
+import jwt from 'jsonwebtoken';
 import User from '../models/user';
 
 class TokenController {
   async create(req, res) {
-    console.log(req.body);
     const { email = '', password = '' } = req.body;
 
     if (!email || !password) return res.status(401).json({ errors: ['Credenciais inválidas'] });
@@ -13,7 +13,14 @@ class TokenController {
 
     if (!(await user.passwordIsValid(password))) return res.status(401).json({ errors: ['Senha invalida'] });
 
-    return res.json(user);
+    const { id } = user;
+    const token = jwt.sign(
+      { id, email },
+      process.env.TOKEN_SECRET,
+      { expiresIn: process.env.TOKEN_EXPIRATION },
+    );
+
+    return res.json({ token });
   }
 }
 
