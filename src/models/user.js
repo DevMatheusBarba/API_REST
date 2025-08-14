@@ -32,7 +32,7 @@ export default class User extends Model {
         defaultValue: '',
       },
       password: {
-        type: Sequelize.VIRTUAL,
+        type: Sequelize.VIRTUAL, // É um campo que não existe na tabela
         defaultValue: '',
         validate: {
           len: {
@@ -40,7 +40,7 @@ export default class User extends Model {
             msg: 'O campo senha precisa ter entre [6, 50] caracteres',
           },
         },
-      }, // É um campo que não existe na tabela
+      },
     }, {
       sequelize,
     });
