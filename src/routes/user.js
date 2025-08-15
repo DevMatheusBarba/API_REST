@@ -6,7 +6,7 @@ const router = new Router();
 
 // Não existe no projeto real
 // router.get('/:id', UserController.show);
-router.get('/', UserController.index);
+// router.get('/', UserController.index);
 
 router.post('/', UserController.create);
 router.put('/', loginRequire, UserController.update);
