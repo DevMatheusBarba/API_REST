@@ -23,7 +23,7 @@
 Este projeto é uma API RESTful para gerenciamento escolar, construída com Node.js, Express e Sequelize. O sistema permite:
 
 - Cadastro e gerenciamento de **Usuários** (CRUD completo)
-- Início do cadastro de **Alunos** (estrutura pronta para CRUD)
+- Cadastro e gerenciamento de **Alunos** (CRUD completo)
 - Autenticação via **JSON Web Token (JWT)**
 - Rotas protegidas por autenticação
 - Rota de login para geração de token
@@ -33,7 +33,7 @@ Funcionalidades implementadas:
 - Cadastro, listagem, atualização e remoção de usuários
 - Autenticação e geração de token JWT
 - Proteção de rotas sensíveis (atualizar/deletar usuário)
-- Estrutura para cadastro de alunos
+- Cadastro, listagem, atualização e remoção de alunos
 
 A aplicação está sendo construída seguindo as melhores práticas de desenvolvimento, incluindo:
 
@@ -58,7 +58,7 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente local
 
 1.  **Clone o repositório:**
     ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
+    git clone https://github.com/DevMatheusBarba/API_REST.git
     ```
 
 2.  **Navegue até a pasta do projeto:**
@@ -84,8 +84,8 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente local
   DATABASE=nome_do_banco
 
   # JWT
-  TOKEN_SECRET=sua_chave_secreta
-  TOKEN_EXPIRATION=7d
+  TOKEN_SECRET=secrettoken
+  TOKEN_EXPIRATION=2h
   ```
 
 5.  **Execute as Migrations do Banco de Dados:**
@@ -107,7 +107,7 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente local
 
 A API oferece:
 - CRUD completo para **Usuários**
-- Estrutura para CRUD de **Alunos**
+- CRUD completo para **Alunos**
 - Autenticação JWT
 - Rotas protegidas
 - Rota de login/token
@@ -118,7 +118,6 @@ A API oferece:
 | Método   | Rota         | Descrição                        | Autenticação |
 |----------|--------------|----------------------------------|--------------|
 | `POST`   | `/users`     | Cria um novo usuário             | Não          |
-| `GET`    | `/users`     | Lista todos os usuários          | Não          |
 | `PUT`    | `/users`     | Atualiza o usuário autenticado   | **Sim** (JWT)|
 | `DELETE` | `/users`     | Remove o usuário autenticado     | **Sim** (JWT)|
 
@@ -127,14 +126,63 @@ A API oferece:
 |----------|--------------|----------------------------------|
 | `POST`   | `/tokens`    | Realiza login e retorna o token  |
 
-#### **Recurso: Alunos (`/`)**
-| Método   | Rota         | Descrição                        |
-|----------|--------------|----------------------------------|
-| `GET`    | `/`          | Cria um aluno de exemplo         |
+#### **Recurso: Alunos (`/alunos`)**
+| Método   | Rota             | Descrição                        | Autenticação |
+|----------|------------------|----------------------------------|--------------|
+| `POST`   | `/alunos`        | Cria um novo aluno               | **Sim** (JWT)|
+| `GET`    | `/alunos`        | Lista todos os alunos            | Não          |
+| `GET`    | `/alunos/:id`    | Busca um aluno pelo ID           | Não          |
+| `PUT`    | `/alunos/:id`    | Atualiza um aluno existente      | **Sim** (JWT)|
+| `DELETE` | `/alunos/:id`    | Remove um aluno                  | **Sim** (JWT)|
 
 ---
 
 ### Exemplos de Uso (cURL)
+#### **7. Criar um Novo Aluno (autenticado)**
+*Este endpoint exige um token JWT.*
+```bash
+curl -X POST http://localhost:3001/alunos \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer SEU_TOKEN_JWT" \
+-d '{
+  "nome": "Aluno Teste",
+  "sobrenome": "da Silva",
+  "email": "aluno.teste@example.com",
+  "idade": 20,
+  "peso": 70.5,
+  "altura": 175
+}'
+```
+
+#### **8. Listar Todos os Alunos**
+```bash
+curl -X GET http://localhost:3001/alunos
+```
+
+#### **9. Buscar um Aluno por ID**
+*Substitua `1` pelo ID do aluno desejado.*
+```bash
+curl -X GET http://localhost:3001/alunos/1
+```
+
+#### **10. Atualizar um Aluno (autenticado)**
+*Este endpoint exige um token JWT.*
+```bash
+curl -X PUT http://localhost:3001/alunos/1 \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer SEU_TOKEN_JWT" \
+-d '{
+  "nome": "Aluno Atualizado",
+  "email": "aluno.atualizado@example.com"
+}'
+```
+
+#### **11. Deletar um Aluno (autenticado)**
+*Este endpoint exige um token JWT.*
+```bash
+curl -X DELETE http://localhost:3001/alunos/1 \
+-H "Authorization: Bearer SEU_TOKEN_JWT"
+```
 
 Use os comandos abaixo para interagir com a API. Substitua `:3001` pela porta correta, se necessário.
 
@@ -210,6 +258,6 @@ A API está em evolução. Próximos recursos planejados:
 - [x] CRUD completo para **Usuários**
 - [x] Autenticação JWT e rotas protegidas
 - [x] Rota de login/token
-- [ ] CRUD completo para **Alunos**
+- [x] CRUD completo para **Alunos**
 - [ ] Upload de fotos para alunos
 - [ ] Testes automatizados
