@@ -1,9 +1,20 @@
 import Aluno from '../models/aluno';
+import Foto from '../models/foto';
 
 class AlunoController {
   async index(req, res) {
     try {
-      const alunos = await Aluno.findAll({ attributes: ['id', 'nome', 'sobrenome', 'email', 'idade', 'peso', 'altura'] });
+      const alunos = await Aluno.findAll({
+        attributes: ['id', 'nome', 'sobrenome', 'email', 'idade', 'peso', 'altura'],
+        order: [['id', 'DESC']],
+        include: {
+          model: Foto,
+          as: 'fotos',
+          attributes: ['id', 'filename', 'url'],
+          order: [['id', 'DESC']],
+          limit: 1,
+        },
+      });
       return res
         .json(alunos);
     } catch (error) {
@@ -15,15 +26,19 @@ class AlunoController {
     try {
       const { id } = req.params;
       if (!id) return res.status(400).json({ error: 'ID não informado' });
-      const aluno = await Aluno.findByPk(id);
+      const aluno = await Aluno.findByPk(id, {
+        attributes: ['id', 'nome', 'sobrenome', 'email', 'idade', 'peso', 'altura'],
+        order: [['id', 'DESC']],
+        include: {
+          model: Foto,
+          as: 'fotos',
+          order: [['id', 'DESC']],
+          attributes: ['id', 'filename'],
+        },
+      });
       if (!aluno) return res.status(400).json({ error: 'Aluno não encontrado' });
 
-      const {
-        nome, sobrenome, email, idade, peso, altura,
-      } = aluno;
-      return res.json({
-        id, nome, sobrenome, email, idade, peso, altura,
-      });
+      return res.json(aluno);
     } catch (error) {
       return res.status(400).json({ errors: error.errors.map((e) => e.message) });
     }

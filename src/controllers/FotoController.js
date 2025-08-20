@@ -12,12 +12,19 @@ class FotoController {
         return res.status(400).json({ errors: [err.code] });
       }
 
-      const { originalname, filename } = req.file;
-      const { aluno_id } = req.body;
+      try {
+        const { originalname, filename } = req.file;
+        const { aluno_id } = req.body;
 
-      const foto = await Foto.create({ originalname, filename, aluno_id });
+        const foto = await Foto.create({ originalname, filename, aluno_id });
+        const { id, url } = foto;
 
-      return res.json(foto);
+        return res.json({
+          id, originalname, filename, aluno_id, url,
+        });
+      } catch (error) {
+        return res.status(400).json({ errors: ['Aluno não encontrado'] });
+      }
     });
   }
 }
