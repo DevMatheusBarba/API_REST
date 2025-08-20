@@ -1,6 +1,7 @@
+
 <div align="center">
-  <h1 style="font-size: 4rem; font-weight: bold;">
-    ⚠️ API EM DESENVOLVIMENTO ⚠️
+  <h1 style="font-size: 3rem; font-weight: bold; color: #27ae60;">
+    ✅ API RESTFUL FINALIZADA E EM PRODUÇÃO ✅
   </h1>
 </div>
 
@@ -18,9 +19,10 @@
 
 ---
 
+
 ## 📖 Sobre o Projeto
 
-Este projeto é uma API RESTful para gerenciamento escolar, construída com Node.js, Express e Sequelize. O sistema permite:
+Este projeto é uma API RESTful para gerenciamento escolar, construída com Node.js, Express e Sequelize. O sistema está **finalizado e em produção**, permitindo:
 
 - Cadastro e gerenciamento de **Usuários** (CRUD completo)
 - Cadastro e gerenciamento de **Alunos** (CRUD completo)
@@ -28,19 +30,20 @@ Este projeto é uma API RESTful para gerenciamento escolar, construída com Node
 - Rotas protegidas por autenticação
 - Rota de login para geração de token
 - Middleware para validação de token JWT
+- Upload de fotos para alunos
 
 Funcionalidades implementadas:
 - Cadastro, listagem, atualização e remoção de usuários
 - Autenticação e geração de token JWT
 - Proteção de rotas sensíveis (atualizar/deletar usuário)
 - Cadastro, listagem, atualização e remoção de alunos
+- Upload e gerenciamento de fotos dos alunos
 
-A aplicação está sendo construída seguindo as melhores práticas de desenvolvimento, incluindo:
-
--   **Estrutura MVC (Model-View-Controller):** Para uma organização de código clara e de fácil manutenção.
--   **Validação de Dados:** Utilizando as capacidades do Sequelize para garantir a integridade dos dados antes de persistir no banco.
--   **Segurança:** Hashing de senhas com `bcryptjs` para proteger as informações dos usuários.
--   **Variáveis de Ambiente:** Uso de arquivos `.env` para gerenciar configurações sensíveis de forma segura.
+A aplicação segue as melhores práticas de desenvolvimento, incluindo:
+- **Estrutura MVC (Model-View-Controller):** Organização clara e manutenção facilitada
+- **Validação de Dados:** Garantia de integridade com Sequelize
+- **Segurança:** Hashing de senhas com `bcryptjs`
+- **Variáveis de Ambiente:** Configurações sensíveis em `.env`
 
 ---
 
@@ -252,12 +255,18 @@ curl -X POST http://localhost:3001/tokens \
 
 ---
 
-## 📝 Próximos Passos
 
-A API está em evolução. Próximos recursos planejados:
+## 🏁 Status do Projeto
+
+A API está **finalizada** e disponível em produção! Todos os principais recursos foram implementados:
 - [x] CRUD completo para **Usuários**
 - [x] Autenticação JWT e rotas protegidas
 - [x] Rota de login/token
 - [x] CRUD completo para **Alunos**
-- [ ] Upload de fotos para alunos
+- [x] Upload de fotos para alunos
+
+Possíveis melhorias futuras:
 - [ ] Testes automatizados
+- [ ] Documentação Swagger
+
+Sinta-se à vontade para abrir issues ou contribuir!
