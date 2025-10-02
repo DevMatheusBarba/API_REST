@@ -6,19 +6,11 @@ dotenv.config();
 import './database';
 
 import express from 'express';
-<<<<<<< HEAD:app.js
 import cors from 'cors';
 import helmet from 'helmet';
-import home from './src/routes/home';
-import user from './src/routes/user';
-import token from './src/routes/token';
-=======
 import home from './routes/home';
 import user from './routes/user';
 import token from './routes/token';
-import aluno from './routes/aluno';
-import foto from './routes/foto';
->>>>>>> 5225769aaa8cd1df51a9ae1329442744474d149f:src/app.js
 
 const whiteList = [
   'https://api-escola.duckdns.org',
@@ -54,8 +46,6 @@ class APP {
     this.app.use('/', home);
     this.app.use('/tokens', token);
     this.app.use('/users/', user);
-    this.app.use('/alunos/', aluno);
-    this.app.use('/fotos/', foto);
   }
 }
 
