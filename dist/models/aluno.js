@@ -1,10 +1,10 @@
-import Sequelize, { Model } from 'sequelize';
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _sequelize = require('sequelize'); var _sequelize2 = _interopRequireDefault(_sequelize);
 
-export default class Aluno extends Model {
+ class Aluno extends _sequelize.Model {
   static init(sequelize) {
     super.init({
       nome: {
-        type: Sequelize.STRING,
+        type: _sequelize2.default.STRING,
         defaultValue: '',
         validate: {
           len: {
@@ -14,7 +14,7 @@ export default class Aluno extends Model {
         },
       },
       sobrenome: {
-        type: Sequelize.STRING,
+        type: _sequelize2.default.STRING,
         defaultValue: '',
         validate: {
           len: {
@@ -24,7 +24,7 @@ export default class Aluno extends Model {
         },
       },
       email: {
-        type: Sequelize.STRING,
+        type: _sequelize2.default.STRING,
         unique: {
           msg: 'Email já existe',
         },
@@ -35,7 +35,7 @@ export default class Aluno extends Model {
         },
       },
       idade: {
-        type: Sequelize.INTEGER,
+        type: _sequelize2.default.INTEGER,
         validate: {
           isInt: {
             msg: 'Idade precisa ser um número inteiro',
@@ -44,7 +44,7 @@ export default class Aluno extends Model {
         },
       },
       peso: {
-        type: Sequelize.FLOAT,
+        type: _sequelize2.default.FLOAT,
         validate: {
           isFloat: {
             msg: 'Peso precisa ser um número',
@@ -52,7 +52,7 @@ export default class Aluno extends Model {
         },
       },
       altura: {
-        type: Sequelize.FLOAT,
+        type: _sequelize2.default.FLOAT,
         validate: {
           isFloat: {
             msg: 'Altura precisa ser um número',
@@ -72,4 +72,4 @@ export default class Aluno extends Model {
   static associate(models) {
     this.hasMany(models.foto, { foreignKey: 'aluno_id', as: 'fotos' });
   }
-}
+} exports.default = Aluno;

@@ -1,9 +1,9 @@
-import User from '../models/user';
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _user = require('../models/user'); var _user2 = _interopRequireDefault(_user);
 
 class UserController {
   async create(req, res) {
     try {
-      const newUser = await User.create(req.body);
+      const newUser = await _user2.default.create(req.body);
       const { id, nome, email } = newUser;
       return res.json({ id, nome, email });
     } catch (error) {
@@ -14,7 +14,7 @@ class UserController {
   // Index
   async index(req, res) {
     try {
-      const users = await User.findAll({ attributes: ['id', 'nome', 'email'] });
+      const users = await _user2.default.findAll({ attributes: ['id', 'nome', 'email'] });
       return res.json(users);
     } catch (error) {
       return res.json(null);
@@ -25,7 +25,7 @@ class UserController {
   async show(req, res) {
     try {
       const { id } = req.params;
-      const user = await User.findByPk(id);
+      const user = await _user2.default.findByPk(id);
       const { nome, email } = user;
       return res.json({ id, nome, email });
     } catch (error) {
@@ -36,7 +36,7 @@ class UserController {
   // Update
   async update(req, res) {
     try {
-      const user = await User.findByPk(req.userId);
+      const user = await _user2.default.findByPk(req.userId);
       if (!user) return res.status(400).json({ errors: ['Usuário não encontrado'] });
 
       await user.update(req.body);
@@ -50,7 +50,7 @@ class UserController {
   // Delete
   async delete(req, res) {
     try {
-      const user = await User.findByPk(req.userId);
+      const user = await _user2.default.findByPk(req.userId);
       if (!user) return res.status(400).json({ errors: ['Usuário não encontrado'] });
 
       await user.destroy();
@@ -62,4 +62,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+exports. default = new UserController();
