@@ -14,7 +14,7 @@ import token from './routes/token';
 
 const whiteList = [
   'https://api-escola.duckdns.org',
-  'localhost:3000',
+  'localhost:3003',
 ];
 
 const corsOptions = {

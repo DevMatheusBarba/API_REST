@@ -14,7 +14,7 @@ var _token = require('./routes/token'); var _token2 = _interopRequireDefault(_to
 
 const whiteList = [
   'https://api-escola.duckdns.org',
-  'localhost:3000',
+  'localhost:3003',
 ];
 
 const corsOptions = {
